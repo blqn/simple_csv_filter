@@ -52,13 +52,14 @@ CVS parser
 ~~~~~~~~~~
 
 Argument that are passed to **csv.reader** and **csv.writer** methods (`<https://docs.python.org/library/csv.html>`_) through \*\*kwargs.
-The key *out* can be passed to indicate the saveas filename.
+The key *out* can be passed to indicate the saveas filename and *encoding* to define files encoding.
 
 .. code-block:: none
 
     [csv]
     out = out.csv
     encoding = UTF-8
+    delimiter = ,
 
 Filter
 ~~~~~~
