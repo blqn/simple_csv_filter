@@ -17,6 +17,18 @@ parser.add_argument('csv_file', type=str, help='csv file to filter')
 
 
 def finder(in_filename, out_filename, filters, encoding, csv_opt=None):
+    """
+    Find **filters** in **in_filename** open with **encoding** and write it
+    in **out_filename**.
+
+    :param in_filename: path to CSV file to filter
+    :param out_filename: path to CSV output file filtered.
+    :param filters: list of filters. Filters are dict with header in key
+        and regex in value.
+    :param encoding: encoding for in_file and out_file
+    :param csv_opt: csv options dict passed through **kwargs
+    :return: None
+    """
     out_file = open(out_filename, 'w+', encoding=encoding)
     csv_opt = csv_opt or {}
     writer = csv.writer(out_file, **csv_opt)
@@ -34,8 +46,16 @@ def finder(in_filename, out_filename, filters, encoding, csv_opt=None):
 
 
 def apply_filter(filter_, ftype, row_dict):
+    """
+    Apply a filter on a row.
+
+    :param filter_:  Dict with header in key and regex to apply in value
+    :param ftype: Filter type (or, and, none)
+    :param row_dict: Row dict representation
+    :return: filtered row
+    """
     filtered = [re.search(reg, row_dict.get(key, ''))
-               for key, reg in filter_.items()]
+                for key, reg in filter_.items()]
     print(ftype)
     if ftype == 'or':
         return any(filtered)
@@ -44,7 +64,7 @@ def apply_filter(filter_, ftype, row_dict):
     elif ftype == 'none':
         return not any(filtered)
     else:
-        raise ValueError('Unknow filter type %s' % (ftype))
+        raise ValueError('Unknown filter type %s' % ftype)
 
 
 def main():
