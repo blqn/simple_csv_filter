@@ -14,16 +14,10 @@ with open('HISTORY.rst') as history_file:
 install_requires = []
 
 extras_require = {
-    "test": ["pytest==3.4.0", "pytest-cov==2.5.1"],
+    "test": ["pytest", "pytest-cov"],
     "dev": [
-        "pip==8.1.2",
-        "bumpversion==0.5.3",
-        "wheel==0.29.0",
-        "watchdog==0.8.3",
-        "flake8==2.6.0",
-        "tox==2.3.1",
-        "coverage==4.1",
-        "Sphinx==1.4.8",
+        "flake8",
+        "zest.releaser"
     ]
 }
 
@@ -52,4 +46,9 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
+    entry_points="""
+    # -*- Entry points: -*-
+    [console_scripts]
+    simple_csv_filter = simple_csv_filter.simple_csv_filter:main
+    """,
 )
